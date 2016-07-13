@@ -64,7 +64,7 @@ Example for Apache-LICENSE-2.0 license libraries:
 | ------------- |-----|
 | name     |  name of license|
 | description     |  description of  license |
-| array of library objects    |  collections of libraries |
+| array of library objects    |  collection of libraries |
 
 
 
