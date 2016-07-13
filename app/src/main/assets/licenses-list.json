@@ -1,5 +1,5 @@
 {
-  "licences": [
+  "Licenses": [
     {
       "name": "AOSP",
       "description" : "The Android Open Source Project",
@@ -127,15 +127,6 @@
           "name": "com.adjust.sdk:adjust-android",
           "owner": "adjust GmbH, http://www.adjust.com",
           "copyright": "2012-2015"
-        }
-      ]
-    },
-    {
-      "name": "Hockey",
-      "libraries": [
-        {
-          "name": "net.hockeyapp.android:HockeySDK",
-          "owner": " Microsoft Corporation; nullwire aps; The Android Open Source Project"
         }
       ]
     }

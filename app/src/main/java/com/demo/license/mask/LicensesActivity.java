@@ -8,10 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 
-public final class LicencesActivity extends AppCompatActivity {
+public final class LicensesActivity extends AppCompatActivity {
 
 	public static void showInstance(Activity cxt) {
-		Intent intent = new Intent(cxt, LicencesActivity.class);
+		Intent intent = new Intent(cxt, LicensesActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		ActivityCompat.startActivity(cxt, intent, Bundle.EMPTY);
 	}
@@ -23,10 +23,10 @@ public final class LicencesActivity extends AppCompatActivity {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
-		LicencesFragment dialogFragment = LicencesFragment.newInstance(getApplication());
+		LicensesFragment dialogFragment = LicensesFragment.newInstance(getApplication());
 		if (dialogFragment != null) {
 			getSupportFragmentManager().beginTransaction()
-			                           .replace(R.id.licences_fragment_container, dialogFragment, LicencesFragment.TAG)
+			                           .replace(R.id.licences_fragment_container, dialogFragment, LicensesFragment.TAG)
 			                           .commit();
 		}
 	}

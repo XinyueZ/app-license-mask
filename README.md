@@ -5,6 +5,66 @@ An Android GUI solution to show license the App is using.
 * For horizontal shows app a pop-up list.
 * For vertical shows app a normal activity.
 
+# Struct
+
+* Define different license under ```assets/licences-box``` with meaningful and unique name.
+
+Example for MIT license:
+
+```json
+The MIT License (MIT)
+Copyright (c) <year> <copyright holders>
+.......
+```
+| Placeholder        | Comment |
+| ------------- |: -----:|
+| year     |  For copyright guilty years |
+| copyright holders      |    author |
+
+* Connect different library to different license in ```assets/license-list.json```.
+
+Example for Apache-LICENSE-2.0 license libraries:
+
+```json
+{
+  "licences": [
+      {
+        "name": "Apache-LICENSE-2.0",
+        "description" : "Apache License, Version 2.0",
+        "libraries": [
+          {
+            "name": "com.squareup.leakcanary:leakcanary-android",
+            "owner": "Square, Inc.",
+            "copyright": "2015"
+          },
+          {
+            "name": "com.fasterxml.jackson.core:jackson-core",
+            "owner": "FasterXML/jackson"
+          },
+          //...more libraries...
+        ]
+    }
+    //...other licenses...
+  ]
+}
+```
+#### Library class:
+
+| Placeholder        | Comment |
+| ------------- |: -----:|
+| name     |  name of library|
+| owner (optional)     |    author |
+| copyright(optional)      |    For copyright guilty years |
+
+#### License class:
+
+| Placeholder        | Comment |
+| ------------- |: -----:|
+| name     |  name of license|
+| description     |  description of  license |
+| array of library objects    |  collections of libraries |
+
+
 
 ### Third Party Dependencies
 

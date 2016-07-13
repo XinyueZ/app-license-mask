@@ -22,8 +22,8 @@ import com.demo.license.mask.databinding.ChildBinding;
 import com.demo.license.mask.databinding.GroupBinding;
 import com.demo.license.mask.databinding.LicencesBinding;
 import com.demo.license.mask.ds.Library;
-import com.demo.license.mask.ds.Licence;
-import com.demo.license.mask.ds.Licences;
+import com.demo.license.mask.ds.License;
+import com.demo.license.mask.ds.Licenses;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -36,11 +36,11 @@ import java.util.List;
 import kotlin.NotImplementedError;
 
 
-public final class LicencesFragment extends AppCompatDialogFragment {
-	public static final String TAG = LicencesFragment.class.getName();
+public final class LicensesFragment extends AppCompatDialogFragment {
+	public static final String TAG = LicensesFragment.class.getName();
 	private static final int LAYOUT = R.layout.fragment_licences;
 	private static final int ID_LOAD_LICENCES_TASK = 0x54;
-	private static final String LICENCES_LIST_JSON = "licences-list.json";
+	private static final String LICENCES_LIST_JSON = "licenses-list.json";
 	private LicencesBinding mBinding;
 	private final Gson mGson = new Gson();
 
@@ -59,8 +59,8 @@ public final class LicencesFragment extends AppCompatDialogFragment {
 	}
 	//------------------------------------------------
 
-	public static LicencesFragment newInstance(Context cxt) {
-		return (LicencesFragment) instantiate(cxt, LicencesFragment.class.getName());
+	public static LicensesFragment newInstance(Context cxt) {
+		return (LicensesFragment) instantiate(cxt, LicensesFragment.class.getName());
 	}
 
 	@Override
@@ -84,62 +84,61 @@ public final class LicencesFragment extends AppCompatDialogFragment {
 	}
 
 	private void loadLicences() {
-		getLoaderManager().initLoader(ID_LOAD_LICENCES_TASK, Bundle.EMPTY, new LoaderManager.LoaderCallbacks<Licences>() {
+		getLoaderManager().initLoader(ID_LOAD_LICENCES_TASK, Bundle.EMPTY, new LoaderManager.LoaderCallbacks<Licenses>() {
 			@Override
-			public Loader<Licences> onCreateLoader(int id, Bundle args) {
-				return new AsyncTaskLoader<Licences>(getContext()) {
+			public Loader<Licenses> onCreateLoader(int id, Bundle args) {
+				return new AsyncTaskLoader<Licenses>(getContext()) {
 					@Override
-					public Licences loadInBackground() {
-						Licences licences;
+					public Licenses loadInBackground() {
+						Licenses licenses;
 						try {
-							licences = mGson.fromJson(new InputStreamReader(getContext().getAssets()
-							                                                            .open(LICENCES_LIST_JSON)), Licences.class);
+							licenses = mGson.fromJson(new InputStreamReader(getContext().getAssets()
+							                                                            .open(LICENCES_LIST_JSON)), Licenses.class);
 						} catch (IOException e) {
-							licences = null;
+							licenses = null;
 						}
-						return licences;
+						return licenses;
 					}
 				};
 			}
 
 			@Override
-			public void onLoadFinished(Loader<Licences> loader, Licences licences) {
-				if (licences != null) {
+			public void onLoadFinished(Loader<Licenses> loader, Licenses licenses) {
+				if (licenses != null) {
 					ExpandableListView expListView = mBinding.licencesList;
 					if (expListView != null) {
-						expListView.setAdapter(new LicencesListAdapter(licences));
+						expListView.setAdapter(new LicencesListAdapter(licenses));
 					}
 				}
 			}
 
 			@Override
-			public void onLoaderReset(Loader<Licences> loader) {
+			public void onLoaderReset(Loader<Licenses> loader) {
 
 			}
-		})
-		                  .forceLoad();
+		}).forceLoad();
 	}
 
 
 	private static final class LicencesListAdapter extends BaseExpandableListAdapter {
-		private static final String LICENCES_BOX = "licences-box";
+		private static final String LICENCES_BOX = "licenses-box";
 		private static final String COPYRIGHT_HOLDERS = "<copyright holders>";
 		private static final String YEAR = "<year>";
 		private static final String LICENCE_BOX_LOCATION_FORMAT = "%s/%s.txt";
 		private static final int LAYOUT_GROUP = R.layout.list_licences_item_group;
 		private static final int LAYOUT_CHILD = R.layout.list_licences_item_child;
-		private final Licences mLicences;
+		private final Licenses mLicenses;
 		private final int mLicencesCount;
 		private final ArrayMap<Library, Pair<String, String>> mLibraryList = new ArrayMap<>();//Pair contains licence's name and description.
 		private final ArrayMap<String, String> mLicenceContentList = new ArrayMap<>();
 
-		public LicencesListAdapter(Licences licences) {
-			mLicences = licences;
-			List<Licence> licencesList = mLicences.getLicences();
-			for (Licence licence : licencesList) {
-				List<Library> libraries = licence.getLibraries();
+		public LicencesListAdapter(Licenses licenses) {
+			mLicenses = licenses;
+			List<License> licencesList = mLicenses.getLicenses();
+			for (License license : licencesList) {
+				List<Library> libraries = license.getLibraries();
 				for (Library library : libraries) {
-					mLibraryList.put(library, new Pair<>(licence.getName(), licence.getDescription()));
+					mLibraryList.put(library, new Pair<>(license.getName(), license.getDescription()));
 				}
 			}
 			mLicencesCount = mLibraryList.size();
