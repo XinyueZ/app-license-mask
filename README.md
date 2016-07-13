@@ -16,10 +16,12 @@ The MIT License (MIT)
 Copyright (c) <year> <copyright holders>
 .......
 ```
+
 | Placeholder        | Comment |
-| ------------- |: -----:|
+| ------------- | -----|
 | year     |  For copyright guilty years |
 | copyright holders      |    author |
+
 
 * Connect different library to different license in ```assets/license-list.json```.
 
@@ -51,7 +53,7 @@ Example for Apache-LICENSE-2.0 license libraries:
 #### Library class:
 
 | Placeholder        | Comment |
-| ------------- |: -----:|
+| ------------- | -----|
 | name     |  name of library|
 | owner (optional)     |    author |
 | copyright(optional)      |    For copyright guilty years |
@@ -59,7 +61,7 @@ Example for Apache-LICENSE-2.0 license libraries:
 #### License class:
 
 | Placeholder        | Comment |
-| ------------- |: -----:|
+| ------------- |-----|
 | name     |  name of license|
 | description     |  description of  license |
 | array of library objects    |  collections of libraries |
