@@ -1,0 +1,143 @@
+{
+  "licences": [
+    {
+      "name": "AOSP",
+      "description" : "The Android Open Source Project",
+      "libraries": [
+        {
+          "name": "com.android.support:support-annotations",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support.test:rules",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support.test:runner",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support.test.espresso:espresso-core",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support.test.uiautomator:uiautomator-v18",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support:design",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support:support-v4",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support:recyclerview-v7",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.support:appcompat-v7",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.google.android.gms:play-services",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.google.maps.android:android-maps-utils",
+          "copyright": "2014"
+        },
+        {
+          "name": "com.android.volley:volley",
+          "copyright": "2011"
+        },
+        {
+          "name": "com.jakewharton:disklrucache",
+          "owner": "Jake Wharton",
+          "copyright": "2011-2012"
+        }
+      ]
+    },
+    {
+      "name": "Apache-LICENSE-2.0",
+      "description" : "Apache License, Version 2.0",
+      "libraries": [
+        {
+          "name": "com.squareup.leakcanary:leakcanary-android",
+          "owner": "Square, Inc.",
+          "copyright": "2015"
+        },
+        {
+          "name": "com.fasterxml.jackson.core:jackson-core",
+          "owner": "FasterXML/jackson"
+        },
+        {
+          "name": "com.fasterxml.jackson.core:jackson-databind",
+          "owner": "FasterXML/jackson"
+        },
+        {
+          "name": "com.fasterxml.jackson.core:jackson-annotations",
+          "owner": "FasterXML/jackson"
+        },
+        {
+          "name": "ch.hsr:geohash",
+          "owner": "kungfoo/geohash-java"
+        },
+        {
+          "name": "com.github.johnkil.android-appmsg:appmsg",
+          "owner": "Evgeny Shishkin",
+          "copyright": "2012"
+        },
+        {
+          "name": "com.google.code.gson:gson",
+          "owner": "Google Inc.",
+          "copyright": "2008"
+        },
+        {
+          "name": "com.github.hotchemi:permissionsdispatcher",
+          "owner": "Shintaro Katafuchi, Marcel Schnelle, Yoshinori Isogai",
+          "copyright": "2016"
+        },
+        {
+          "name": "org.greenrobot:eventbus",
+          "owner": "Markus Junginger, greenrobot (http://greenrobot.org)",
+          "copyright": "2012-2016"
+        },
+        {
+          "name": "JakeWharton/ViewPagerIndicator",
+          "owner": "Francisco Figueiredo Jr, Patrik Åkerfeldt, Jake Wharton",
+          "copyright": "2011-2012"
+        },
+        {
+          "name": "Glide",
+          "owner": "bumptech/glide"
+        },
+        {
+          "name": "TouchImageView",
+          "owner": "Michael Ortiz"
+        }
+      ]
+    },
+    {
+      "name": "MIT",
+      "description" : "The MIT License (MIT)",
+      "libraries": [
+        {
+          "name": "com.adjust.sdk:adjust-android",
+          "owner": "adjust GmbH, http://www.adjust.com",
+          "copyright": "2012-2015"
+        }
+      ]
+    },
+    {
+      "name": "Hockey",
+      "libraries": [
+        {
+          "name": "net.hockeyapp.android:HockeySDK",
+          "owner": " Microsoft Corporation; nullwire aps; The Android Open Source Project"
+        }
+      ]
+    }
+  ]
+}
