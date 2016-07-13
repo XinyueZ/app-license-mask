@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">AppLicenseMask</string>
     <string name="action_settings">Settings</string>
+
+
+    <string name="licences_title">Software licenses</string>
+    <string name="licences_caption">In order to support this application we need following components or libraries:</string>
+    <string name="lbl_show_license_list">Show license list</string>
 </resources>

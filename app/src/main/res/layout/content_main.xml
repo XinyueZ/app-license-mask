@@ -9,10 +9,11 @@
     tools:context="com.demo.license.mask.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
+        android:onClick="showLicenseList"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/lbl_show_license_list"
         app:layout_constraintBottom_toBottomOf="@+id/content_main"
         app:layout_constraintLeft_toLeftOf="@+id/content_main"
         app:layout_constraintRight_toRightOf="@+id/content_main"
