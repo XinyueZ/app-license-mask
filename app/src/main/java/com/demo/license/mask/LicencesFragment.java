@@ -3,7 +3,6 @@ package com.demo.license.mask;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
@@ -19,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 
+import com.demo.license.mask.databinding.ChildBinding;
+import com.demo.license.mask.databinding.GroupBinding;
 import com.demo.license.mask.databinding.LicencesBinding;
 import com.demo.license.mask.ds.Library;
 import com.demo.license.mask.ds.Licence;
@@ -35,13 +36,13 @@ import java.util.List;
 import kotlin.NotImplementedError;
 
 
-public final class LicencesFragment extends AppCompatDialogFragment{
+public final class LicencesFragment extends AppCompatDialogFragment {
 	public static final String TAG = LicencesFragment.class.getName();
 	private static final int LAYOUT = R.layout.fragment_licences;
 	private static final int ID_LOAD_LICENCES_TASK = 0x54;
 	private static final String LICENCES_LIST_JSON = "licences-list.json";
 	private LicencesBinding mBinding;
-	private Gson mGson = new Gson();
+	private final Gson mGson = new Gson();
 
 	//------------------------------------------------
 	//Subscribes, event-handlers
@@ -49,6 +50,7 @@ public final class LicencesFragment extends AppCompatDialogFragment{
 
 	/**
 	 * Handler for {@link CloseExpandableListGroupEvent}.
+	 *
 	 * @param e Event {@link CloseExpandableListGroupEvent}.
 	 */
 	@Subscribe
@@ -69,8 +71,8 @@ public final class LicencesFragment extends AppCompatDialogFragment{
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
-		if(context instanceof Activity) {
-			((Activity)context).setTitle(R.string.licences_title);
+		if (context instanceof Activity) {
+			((Activity) context).setTitle(R.string.licences_title);
 		}
 	}
 
@@ -114,7 +116,8 @@ public final class LicencesFragment extends AppCompatDialogFragment{
 			public void onLoaderReset(Loader<Licences> loader) {
 
 			}
-		}).forceLoad();
+		})
+		                  .forceLoad();
 	}
 
 
@@ -176,34 +179,31 @@ public final class LicencesFragment extends AppCompatDialogFragment{
 		}
 
 		public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-			GroupHolder holder;
+			GroupBinding binding;
 			if (convertView == null) {
-				ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), LAYOUT_GROUP, parent, false);
-				holder = new GroupHolder(binding);
+				binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), LAYOUT_GROUP, parent, false);
 				convertView = binding.getRoot();
-				convertView.setTag(holder);
+				convertView.setTag(binding);
 			} else {
-				holder = (GroupHolder) convertView.getTag();
+				binding = (GroupBinding) convertView.getTag();
 			}
 			Library library = mLibraryList.keyAt(groupPosition);
 			Pair<String, String> nameDesc = mLibraryList.get(library);
 
-			holder.mBinding.setVariable(com.demo.license.mask.BR.title, library.getName());
-			holder.mBinding.setVariable(com.demo.license.mask.BR.description, nameDesc.second);
-			holder.mBinding.executePendingBindings();
+			binding.setTitle(library.getName());
+			binding.setDescription(nameDesc.second);
+			binding.executePendingBindings();
 			return convertView;
 		}
 
 		public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-			Context cxt = parent.getContext();
-			ChildHolder holder;
+			ChildBinding binding;
 			if (convertView == null) {
-				ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), LAYOUT_CHILD, parent, false);
-				holder = new ChildHolder(binding);
+				binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), LAYOUT_CHILD, parent, false);
 				convertView = binding.getRoot();
-				convertView.setTag(holder);
+				convertView.setTag(binding);
 			} else {
-				holder = (ChildHolder) convertView.getTag();
+				binding = (ChildBinding) convertView.getTag();
 			}
 
 			String content;
@@ -211,28 +211,32 @@ public final class LicencesFragment extends AppCompatDialogFragment{
 			Pair<String, String> nameDesc = mLibraryList.get(library);
 			//Licence content will be read from disk firstly and from memory next time.
 			if (mLicenceContentList.get(nameDesc.first) == null) {
-				content = loadLicencesContent(cxt, nameDesc.first);
+				content = loadLicencesContent(parent.getContext(), nameDesc.first);
 				mLicenceContentList.put(nameDesc.first, content);
 			} else {
 				content = mLicenceContentList.get(nameDesc.first);
 			}
 
 			if (content.contains(YEAR) && content.contains(COPYRIGHT_HOLDERS)) {
-				content = content.replace(YEAR, TextUtils.isEmpty(library.getCopyright()) ?
-				                                "" :
-				                                library.getCopyright())
-				                 .replace(COPYRIGHT_HOLDERS, TextUtils.isEmpty(library.getOwner()) ?
-				                                             "" :
-				                                             library.getOwner());
+				content = content.replace(YEAR,
+				                          TextUtils.isEmpty(library.getCopyright()) ?
+				                          "" :
+				                          library.getCopyright())
+				                 .replace(COPYRIGHT_HOLDERS,
+				                          TextUtils.isEmpty(library.getOwner()) ?
+				                          "" :
+				                          library.getOwner());
 			}
-			holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					EventBus.getDefault().post(new CloseExpandableListGroupEvent(groupPosition));
-				}
-			});
-			holder.mBinding.setVariable(com.demo.license.mask.BR.content, content);
-			holder.mBinding.executePendingBindings();
+			binding.getRoot()
+			               .setOnClickListener(new View.OnClickListener() {
+				               @Override
+				               public void onClick(View view) {
+					               EventBus.getDefault()
+					                       .post(new CloseExpandableListGroupEvent(groupPosition));
+				               }
+			               });
+			binding.setContent(content);
+			binding.executePendingBindings();
 			return convertView;
 		}
 
@@ -242,25 +246,13 @@ public final class LicencesFragment extends AppCompatDialogFragment{
 			String licenceContent;
 			try {
 				licenceContent = Utils.readTextFile(cxt.getAssets()
-				                                                    .open(licenceLocation));
+				                                       .open(licenceLocation));
 			} catch (IOException e) {
 				licenceContent = null;
 			}
 			return licenceContent;
 		}
 
-		private static final class GroupHolder {
-			private ViewDataBinding mBinding;
-			public GroupHolder(ViewDataBinding binding) {
-				mBinding = binding;
-			}
-		}
 
-		private final class ChildHolder {
-			private ViewDataBinding mBinding;
-			public ChildHolder(ViewDataBinding binding) {
-				mBinding = binding;
-			}
-		}
 	}
 }

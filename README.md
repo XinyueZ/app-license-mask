@@ -19,6 +19,10 @@ An Android GUI solution to show license the App is using.
 *  Gson is released under the Apache 2.0 license.
 *  Copyright 2008 Google Inc.
 
+### Data-bining for ease programming
+
+* https://developer.android.com/topic/libraries/data-binding/index.html
+
 # License
 
 ```java
